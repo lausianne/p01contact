@@ -7,6 +7,9 @@
  * @author Nicolas Liautaud <contact@nliautaud.fr>
  * @package p01-contact
  * @version 0.9.1
+ * 
+ * 16-01-20 edited by lausianne - success classes instead of hard coded styling
+ *
  */
 if(session_id()=='') session_start();
 
@@ -599,25 +602,12 @@ class P01contact_form
     private function html_status() 
     { 
         if(!$this->status) return '';
-        $style = '
-	        margin:0 0 20px 0;
-	        background:#FCFBB8; 
-	        line-height:30px;
-	        padding:0 10px;
-	        border:1px solid #F9CF51;
-	        border-radius: 5px;
-	        -moz-border-radius: 5px;
-	        -khtml-border-radius: 5px;
-                -webkit-border-radius: 5px;';
+         $statusclass = '';
+         $statusclass = $this->status == 'sent' ? 'success' : 'fail';
 
-         if(($this->status == 'sent') || ($this->status == 'sent_copy')){
-            $style .= 'color:#308000;';
-         }else{
-            $style .= 'color:#D94136;';
-         }
+         return '<div class="'.$statusclass.'">' . $this->lang($this->status) . '</div>';
 
-        
-        return '<div style="'.$style.'">' . $this->lang($this->status) . '</div>';
+         return '<div style="'.$style.'">' . $this->lang($this->status) . '</div>';
     }
     
     /*
